@@ -124,6 +124,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	HDC hdc;
     switch (message)
     {
     case WM_COMMAND:
@@ -143,6 +144,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+	case WM_MOUSEMOVE:
+		{
+			hdc = GetDC(hWnd);
+			MyPaint(hdc, lParam);
+			ReleaseDC(hWnd, hdc);
+		}
+		break;
+	
+		
+
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
